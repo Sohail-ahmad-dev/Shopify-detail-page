@@ -1,0 +1,99 @@
+{% schema %}
+  {
+    "name": "Featured Box",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_heading",
+        "label": "Main Heading",
+        "default": "What’s in the box?"
+      },
+      {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Main Image"
+      },
+      {
+        "type": "text",
+        "id": "featured_on_text",
+        "label": "Featured On Text",
+        "default": "featured on"
+      },
+      {
+        "type": "image_picker",
+        "id": "brand_image",
+        "label": "Brand Image"
+      }, {
+        "type": "image_picker",
+        "id": "brand_image_mobile",
+        "label": "Brand Image Mobile"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Item",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "tick_image",
+            "label": "Tick Image"
+          }, {
+            "type": "text",
+            "id": "item_text",
+            "label": "Item Text",
+            "default": "1 Firebee headband"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Box",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}
+
+<section class="featured--box">
+  <div class="text-center">
+    <h3>{{ section.settings.main_heading }}</h3>
+    {% if section.settings.main_image %}
+      <img
+        src="{{ section.settings.main_image | img_url: 'original' }}"
+        alt="featured-box"
+        class="img-fluid">
+    {% endif %}
+
+    <div class="featured--box_main">
+      <h5>{{ section.settings.featured_on_text }}</h5>
+      {% if section.settings.brand_image %}
+        <img
+          src="{{ section.settings.brand_image | img_url: 'original' }}"
+          alt="featured-box-brand"
+          class="img-fluid mobile_hide">
+      {% endif %}
+      {% if section.settings.brand_image_mobile %}
+        <img
+          src="{{ section.settings.brand_image_mobile | img_url: 'original' }}"
+          alt="featured-box-brand"
+          class="img-fluid mobile_show d-none">
+      {% endif %}
+      <hr>
+      <ul class="d-flex justify-content-between small_wrap">
+        {% for block in section.blocks %}
+          <li>
+            {% if block.settings.tick_image %}
+              <img
+                src="{{ block.settings.tick_image | img_url: 'original' }}"
+                alt="tick"
+                class="img-fluid w-40">
+            {% endif %}
+            <p>{{ block.settings.item_text }}</p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

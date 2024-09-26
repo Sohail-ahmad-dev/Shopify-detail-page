@@ -1,0 +1,86 @@
+{% schema %}
+  {
+    "name": "What Will Do for Me?",
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_heading",
+        "label": "Main Heading",
+        "default": "What will Firebee do for me?"
+      }, {
+        "type": "text",
+        "id": "sub_heading",
+        "label": "Sub Heading",
+        "default": "Firebee will help you gently nudge yourself into a different mental state"
+      }, {
+        "type": "image_picker",
+        "id": "main_image",
+        "label": "Main Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "feature",
+        "name": "Feature",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "tick_image",
+            "label": "Tick Image"
+          }, {
+            "type": "text",
+            "id": "feature_text",
+            "label": "Feature Text",
+            "default": "Can’t sleep? Turn on the deep sleep signal"
+          }, {
+            "type": "text",
+            "id": "highlight_text",
+            "label": "Highlight Text",
+            "default": "deep sleep"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "What Do",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}
+
+<section class="what-for-for">
+  {% if section.settings.main_image %}
+    <img
+      src="{{ section.settings.main_image | img_url: 'original' }}"
+      alt="what-for"
+      class="img-fluid d-none mobile_show">
+  {% endif %}
+  <div class="px-25">
+    <h1>{{ section.settings.main_heading }}</h1>
+    <h4>{{ section.settings.sub_heading }}</h4>
+    <div class="what-for--main">
+      {% if section.settings.main_image %}
+        <img
+          src="{{ section.settings.main_image | img_url: 'original' }}"
+          alt="what-for"
+          class="img-fluid mobile_hide">
+      {% endif %}
+      <ul>
+        {% for block in section.blocks %}
+          <li>
+            {% if block.settings.tick_image %}
+              <div>
+                <img src="{{ block.settings.tick_image | img_url: 'original' }}" alt="tick">
+              </div>
+            {% endif %}
+            <p>{{ block.settings.feature_text }}
+              <span class="gradient--text">{{ block.settings.highlight_text }}</span>
+            </p>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>

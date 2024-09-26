@@ -1,0 +1,79 @@
+<section class="firebee--signals position-relative">
+  <img
+    src="{{ section.settings.background_image | img_url: 'original' }}"
+    alt="signal bg"
+    class="img-fluid position-absolute top-0 start-0">
+  <div class="firebee--main custom-padding pt-0 text-center">
+    <h3>{{ section.settings.heading }}</h3>
+    <h5>{{ section.settings.subheading }}</h5>
+
+    <div class="row lists--main">
+      {% for block in section.blocks %}
+        <div class="col-md-4 col-sm-6 col-12">
+          <div class="bg--light-gray">
+            <div>
+              {% if block.settings.signal_image %}
+                <img
+                  src="{{ block.settings.signal_image | img_url: 'original' }}"
+                  alt="firebee"
+                  class="img-fluid m-w-100">
+              {% endif %}
+            </div>
+            <p>{{ block.settings.signal_text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <img
+    src="{{ section.settings.background_image | img_url: 'original' }}"
+    alt="signal bg"
+    class="img-fluid position-absolute end-0 bottom-0">
+</section>
+
+{% schema %}
+  {
+    "name": "Firebee Signals",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image",
+      }, {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Firebee Signals"
+      }, {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "A signal for every situation"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "signal",
+        "name": "Signal",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "signal_image",
+            "label": "Signal Image",
+          }, {
+            "type": "text",
+            "id": "signal_text",
+            "label": "Signal Text",
+            "default": "Discover your best sleep with responsive sleep journeys, overnight sleep tracking, and personalized insights."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Firebee Signals",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}

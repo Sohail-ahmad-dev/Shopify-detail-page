@@ -1,0 +1,240 @@
+<footer>
+    <div class="footer--bar-top"></div>
+    <div class="bg-dark text-white">
+        <div class="footer">
+            <div class="row footer--links">
+                {% for block in section.blocks %}
+                    {% if block.type == 'link_list' %}
+                        <div class="col-md-{{ block.settings.column_width }} col-6">
+                            <h5>{{ block.settings.heading }}</h5>
+                            <ul class="list-unstyled">
+                                {% for link in linklists[block.settings.menu].links %}
+                                    <li><a href="{{ link.url }}" class="text-white">{{ link.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    {% if block.type == 'social_media' %}
+                        <div class="col-md-7 col-6">
+                            <h5>{{ block.settings.heading }}</h5>
+                            <ul class="list-unstyled d-flex">
+                              
+                              {% if block.settings.youtube_url %}
+                                <li>
+                                  <a href="{{ block.settings.youtube_url }}" class="text-white pend-20">
+                                    <img src="{{ block.settings.youtube_image | img_url: '100x100' }}" alt="YouTube" class="img-fluid">
+                                  </a>
+                                </li>
+                              {% endif %}
+
+                              {% if block.settings.twitter_url %}
+                                <li>
+                                  <a href="{{ block.settings.twitter_url }}" class="text-white pend-20">
+                                    <img src="{{ block.settings.twitter_image | img_url: '100x100' }}" alt="Twitter" class="img-fluid">
+                                  </a>
+                                </li>
+                              {% endif %}
+
+                              {% if block.settings.facebook_url %}
+                                <li>
+                                  <a href="{{ block.settings.facebook_url }}" class="text-white pend-20">
+                                    <img src="{{ block.settings.facebook_image | img_url: '100x100' }}" alt="Facebook" class="img-fluid">
+                                  </a>
+                                </li>
+                              {% endif %}
+
+                              {% if block.settings.instagram_url %}
+                                <li>
+                                  <a href="{{ block.settings.instagram_url }}" class="text-white pend-20">
+                                    <img src="{{ block.settings.instagram_image | img_url: '100x100' }}" alt="Instagram" class="img-fluid">
+                                  </a>
+                                </li>
+                              {% endif %}
+
+                              {% if block.settings.pinterest_url %}
+                                <li>
+                                  <a href="{{ block.settings.pinterest_url }}" class="text-white">
+                                    <img src="{{ block.settings.pinterest_image | img_url: '100x100' }}" alt="Pinterest" class="img-fluid">
+                                  </a>
+                                </li>
+                              {% endif %}
+                                  
+                            </ul>
+
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <hr>
+        <div class="footer custom-padding" style="background-image: url('{{ section.settings.background_image | img_url: 'master' }}');">
+            <div class="d-flex justify-content-between small_wrap">
+                <div>
+                    <img src="{{ section.settings.logo_image | img_url: 'orignal' }}" class="img-fluid b-30" alt="logo">
+                    <p class="copy-right">{{ section.settings.copyright_text }}</p>
+                    <p class="diagnose">{{ section.settings.diagnose_text }}</p>
+                </div>
+                <div class="text-end">
+                    {% if section.settings.show_policy_links %}
+                        <a href="{{ section.settings.privacy_policy_link }}" class="t_p_links">{{ section.settings.privacy_policy_text }}</a>
+                        <a href="{{ section.settings.terms_service_link }}" class="t_p_links">{{ section.settings.terms_service_text }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo Image"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text"
+    },
+    {
+      "type": "text",
+      "id": "diagnose_text",
+      "label": "Diagnose Text"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy_links",
+      "label": "Show Policy Links",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "privacy_policy_link",
+      "label": "Privacy Policy Link"
+    },
+    {
+      "type": "text",
+      "id": "privacy_policy_text",
+      "label": "Privacy Policy Text",
+      "default": "Privacy Policy"
+    },
+    {
+      "type": "url",
+      "id": "terms_service_link",
+      "label": "Terms of Service Link"
+    },
+    {
+      "type": "text",
+      "id": "terms_service_text",
+      "label": "Terms of Service Text",
+      "default": "Terms of Service"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Link List",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        },
+        {
+          "type": "range",
+          "id": "column_width",
+          "label": "Column Width",
+          "min": 1,
+          "max": 12,
+          "default": 4
+        }
+      ]
+    },
+    {
+      "type": "social_media",
+      "name": "Social Media",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "image_picker",
+          "id": "youtube_image",
+          "label": "YouTube Icon Image"
+        },
+        {
+          "type": "url",
+          "id": "youtube_url",
+          "label": "YouTube URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "twitter_image",
+          "label": "Twitter Icon Image"
+        },
+        {
+          "type": "url",
+          "id": "twitter_url",
+          "label": "Twitter URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "facebook_image",
+          "label": "Facebook Icon Image"
+        },
+        {
+          "type": "url",
+          "id": "facebook_url",
+          "label": "Facebook URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "instagram_image",
+          "label": "Instagram Icon Image"
+        },
+        {
+          "type": "url",
+          "id": "instagram_url",
+          "label": "Instagram URL"
+        },
+        {
+          "type": "image_picker",
+          "id": "pinterest_image",
+          "label": "Pinterest Icon Image"
+        },
+        {
+          "type": "url",
+          "id": "pinterest_url",
+          "label": "Pinterest URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default Footer",
+      "category": "Footer"
+    }
+  ]
+}
+
+
+{% endschema %}
+    

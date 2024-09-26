@@ -1,0 +1,44 @@
+<script>
+  console.log({{  feature | json }},"asdasd")
+</script>
+
+<div class="featuers--main {{is_mobile}}">
+  <div class="row">
+    <div class="col-6">
+      <img
+        src="{{ feature.feature_1_image | img_url: 'medium' }}"
+        width=""
+        height=""
+        alt="feature_1_image"
+        class="img-fluid">
+      <h5 class="text--feature">{{ feature.feature_1_title }}</h5>
+    </div>
+    <div class="col-6">
+      <img
+        src="{{ feature.feature_2_image | img_url: 'medium' }}"
+        width=""
+        height=""
+        alt="feature_2_image"
+        class="img-fluid">
+      <h5 class="text--feature">{{ feature.feature_2_title }}</h5>
+    </div>
+    <div class="col-6">
+      <img
+        src="{{ feature.feature_3_image | img_url: 'medium' }}"
+        width=""
+        height=""
+        alt="feature_3_image"
+        class="img-fluid">
+      <h5 class="text--feature">{{ feature.feature_3_title }}</h5>
+    </div>
+    <div class="col-6">
+      <img
+        src="{{ feature.feature_4_image | img_url: 'medium' }}"
+        width=""
+        height=""
+        alt="feature_4_image"
+        class="img-fluid">
+      <h5 class="text--feature">{{ feature.feature_4_title }}</h5>
+    </div>
+  </div>
+</div>

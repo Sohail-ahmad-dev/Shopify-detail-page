@@ -1,0 +1,44 @@
+<section class="money-back custom-padding">
+  <div class="back--main">
+    {% if section.settings.image %}
+      <img
+        src="{{ section.settings.image | img_url: 'original' }}"
+        alt="money back"
+        class="img-fluid">
+    {% endif %}
+    <div class="content--back">
+      <h4>{{ section.settings.heading }}</h4>
+      <p>{{ section.settings.text }}</p>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Money Back Guarantee",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+      }, {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "30 Day Money Back Guarantee"
+      }, {
+        "type": "textarea",
+        "id": "text",
+        "label": "Text",
+        "default": "At Firebee we believe in building quality products that actually work. Firebee and its partners have invested over $85 million in research and development to create the highest quality wearable for customers to enjoy. If for any reason you are not satisfied with your Firebee headband we will happily refund your purchase."
+      }
+    ],
+    "presets": [
+      {
+        "name": "Money Back Guarantee",
+        "category": "Money Back Guarantee"
+      }
+    ]
+  }
+{% endschema %}

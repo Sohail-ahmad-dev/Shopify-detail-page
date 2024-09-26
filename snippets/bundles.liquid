@@ -1,0 +1,35 @@
+<ul class="product-kits">
+  {% for kit in collections['bundles'].products %}
+    <li>
+      <input
+        type="radio"
+        name="kit-product"
+        id="product{{ forloop.index }}"
+        {% if forloop.first %}
+        checked{% endif %}
+        class="d-none">
+      <label for="product{{ forloop.index }}">
+        <div class="content--main">
+          <div class="title-price">
+            <h3>{{ kit.title }}</h3>
+            <div class="prices">
+              {% if kit.compare_at_price > kit.price %}
+                <del class="old-price">{{ kit.compare_at_price | money }}</del>
+              {% endif %}
+              <h4 class="new-price">{{ kit.price | money }}</h4>
+            </div>
+
+          </div>
+
+          {% if forloop.first %}
+            <div class="is_popular">MOST POPULAR KIT</div>
+          {% endif %}
+
+          <div class="description">
+            {{ kit.description }}
+          </div>
+        </div>
+      </label>
+    </li>
+  {% endfor %}
+</ul>

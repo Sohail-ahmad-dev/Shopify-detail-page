@@ -1,0 +1,142 @@
+{{ 'slick.css' | asset_url | stylesheet_tag }}
+
+<!-- product detail start -->
+<section class="product--detail">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-12 position-relative">
+                {% render "media-gallery" %}
+
+                {% for block in section.blocks %}
+                    {% if block.type == 'featured_section' %}
+                        {% assign feature = block.settings %}
+                        {% include 'features' with feature, is_mobile:"" %}
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+
+            <div class="col-md-6 col-12 product--detailed">
+                <h2>{{ product.title }}</h2>
+                <div class="rating--main">
+                <img
+                    src="{{ 'rating.png' | asset_img_url: '139x19' }}"
+                    width="139"
+                    height="19"
+                    alt="star"
+                    class="img-fluid">
+                <span>267 Reviews</span>
+                </div>
+                <h5>{{ product.description }}</h5>
+
+                <!-- product kits start -->
+                {% render 'bundles' %}
+                <!-- product kits end -->
+
+
+                <!-- buy button -->
+                <button type="button" class="product--cart-btn">
+                    Add to cart <img src="{{ 'arrow-right.png' |  asset_img_url: "38x30" }}" width="" height="" alt="->" class="img-fluid ps-2">
+                </button>
+                <img src="{{ 'payments.png' |  asset_img_url: 'master' }}" alt="payments" width="" height="" class="mx-auto d-block img-fluid">
+
+                
+                {% for block in section.blocks %}
+                    {% if block.type == 'featured_section' %}
+                        {% assign feature = block.settings %}
+                        {% include 'features' with feature, is_mobile: "mobile_show" %}
+                    {% endif %}
+                {% endfor %}
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- product detail end -->
+
+<script src="{{ 'slick.min.js' | asset_url }}"></script>
+<script>
+    $('.slider-for').slick({
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        arrows: false,
+        fade: true,
+        asNavFor: '.slider-nav'
+    });
+    $('.slider-nav').slick({
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        asNavFor: '.slider-for',
+        dots: false,
+        centerMode: false,
+        focusOnSelect: true,
+        arrows: false,
+    });
+</script>
+
+{% schema %}
+  {
+    "name": "Main Product",
+    "class": "section-Product",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "featured_section",
+        "name": "Features Section",
+        "settings": [
+        {
+            "type": "text",
+            "id": "feature_1_title",
+            "label": "Feature 1 Title",
+            "default": "30-day Money-back Guarantee"
+        },
+        {
+            "type": "image_picker",
+            "id": "feature_1_image",
+            "label": "Feature 1 Image"
+        },
+        {
+            "type": "text",
+            "id": "feature_2_title",
+            "label": "Feature 2 Title",
+            "default": "Free Shipping within USA"
+        },
+        {
+            "type": "image_picker",
+            "id": "feature_2_image",
+            "label": "Feature 2 Image"
+        }, {
+            "type": "text",
+            "id": "feature_3_title",
+            "label": "Feature 3 Title",
+            "default": "Signal Catalogue Updates Included"
+        }, {
+            "type": "image_picker",
+            "id": "feature_3_image",
+            "label": "Feature 3 Image"
+        }, {
+            "type": "text",
+            "id": "feature_4_title",
+            "label": "Feature 4 Title",
+            "default": "Customer Support via E-mail, Phone, and Chat"
+        }, {
+            "type": "image_picker",
+            "id": "feature_4_image",
+            "label": "Feature 4 Image"
+        }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Product Details",
+        "name": "Product Details"
+      }
+    ]
+  }
+{% endschema %}
